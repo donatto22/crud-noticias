@@ -1,0 +1,30 @@
+#newsForm {
+    width: 50%;
+    background-color: rgba(240, 248, 255, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+    border-radius: 10px;
+    top: 1em;
+    position: sticky;
+}
+
+#newsForm input, #newsForm button, #newsForm textarea {
+    width: 100%;
+    border: 0;
+    padding: 1em 0;
+    margin: 0;
+    background-color: rgba(240, 248, 255, 0.088);
+    color: rgb(172, 230, 231); 
+    border-radius: 4px;
+}
+
+#newsForm textarea {
+    resize: none;
+}
+
+#newsForm :is(input:hover, button:hover, textarea:hover) {
+    background-color: rgba(240, 248, 255, 0.120);
+    cursor: pointer;
+}

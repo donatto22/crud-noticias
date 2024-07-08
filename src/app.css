@@ -1,0 +1,48 @@
+@import url('./assets/normalize.css');
+
+/* Fuente Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('./assets/form.css');
+
+:root {
+    --gradient: radial-gradient( circle farthest-corner at 10% 20%,  rgba(2,37,78,1) 0%, rgba(4,56,126,1) 19.7%, rgba(85,245,221,1) 100.2% );
+}
+
+body {
+    background-image: var(--gradient);
+    min-height: 100vh;
+    color: rgb(172, 230, 231); 
+    
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    align-content: center;
+}
+
+h3 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+main {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    vertical-align: middle;
+    padding: 1em 0;
+}
+
+section {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.newsCard {
+    background-color: rgba(240, 248, 255, 0.07);
+    padding: 1em 1em;
+    border-radius: 10px;
+}
+
+.newsCard:not(:last-child) {
+    margin-bottom: 1em;
+}

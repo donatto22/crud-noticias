@@ -27,11 +27,13 @@ const useDatabase = (databaseId, collectionId) => {
      * @param { ID } id El Id unico para crear el documento
      * @param { Object } data El objeto json que contiene la data a insertar 
      */
-    const add = async (id, data) => {
+    const add = async (id, data, onSuccess, onFail) => {
         try {
             await database.createDocument(databaseId, collectionId, id, data)
+            onSuccess && onSuccess()
         } catch(e) {
             console.log(e.message)
+            onFail && onFail()
         }
     }
 
