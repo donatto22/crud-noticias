@@ -3,17 +3,20 @@ import { database, ID } from './lib/appwrite'
 import { APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID } from './lib/env'
 import { useEffect } from 'react'
 
+import useDatabase from './hooks/useDatabase'
+
 const App = () => {
   const [news, setNews] = useState([])
-
-  async function getNews() {
-    const res = await database.listDocuments(APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID)
-    setNews(res.documents)
-  }
+  const { get } = useDatabase(APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID)
 
   useEffect(() => {
-    getNews()
-  }, [])
+    async function fetch() {
+      const data = await get()
+      setNews(data)
+    }
+
+    fetch()
+  })
 
   async function createNews(e) {
     // obtener los datos del formulario
