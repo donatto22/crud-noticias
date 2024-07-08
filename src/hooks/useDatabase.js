@@ -40,7 +40,7 @@ const useDatabase = (databaseId, collectionId) => {
     // delete
     const remove = async (id, onSuccess, onFail) => {
         try {
-            database.deleteDocument(databaseId, collectionId, id)
+            await database.deleteDocument(databaseId, collectionId, id)
             onSuccess && onSuccess()
         } catch(e) {
             console.log(e.message)

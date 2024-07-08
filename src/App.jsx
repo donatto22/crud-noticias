@@ -3,12 +3,16 @@ import { ID } from './lib/appwrite'
 import { APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID } from './lib/env'
 
 import useDatabase from './hooks/useDatabase'
-import './app.css'
 import { NewsForm } from './components/NewsForm'
+import './app.css'
+
+import { MdDelete } from "react-icons/md"
+
+
 
 const App = () => {
   const [news, setNews] = useState([])
-  const { get, add } = useDatabase(APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID)
+  const { get, add, remove } = useDatabase(APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID)
 
   useEffect(() => {
     async function fetch() {
@@ -33,6 +37,12 @@ const App = () => {
     }
   }
 
+  async function deleteNews(id) {
+    await remove(id, () => {
+      alert('eliminado correctamente')
+    })
+  }
+
   function formatDate (date) {
     const formattedDate = new Date(date)
     return formattedDate.getDate() + "/" + formattedDate.getMonth() + "/" + formattedDate.getFullYear()
@@ -49,9 +59,15 @@ const App = () => {
       // nuevo elemento aparecerá primero
         news.reverse().map((n) => (
           <div key={n.$id} className='newsCard'>
-            <div><h3>{ n.title }</h3></div>
-            <div>{ n.description }</div>
-            <div>{ n.author && n.author + ' - ' } { formatDate(n.date) } </div>
+            <div className='newsCardContent'>
+              <div><h3>{ n.title }</h3></div>
+              <div>{ n.description }</div>
+              <div>{ n.author && n.author + ' - ' } { formatDate(n.date) } </div>
+            </div>
+
+            <div className="delete">
+              <MdDelete fontSize='24px' onClick={ () => deleteNews(n.$id) }/>
+            </div>
           </div>
         ))
       }
