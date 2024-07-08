@@ -7,7 +7,7 @@ import useDatabase from './hooks/useDatabase'
 
 const App = () => {
   const [news, setNews] = useState([])
-  const { get } = useDatabase(APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID)
+  const { get, add } = useDatabase(APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID)
 
   useEffect(() => {
     async function fetch() {
@@ -26,10 +26,7 @@ const App = () => {
     const news = Object.fromEntries(formData)
 
     if(news) {
-      await database.createDocument(APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID, ID.unique(), {
-        title: news.title,
-        description: news.description
-      })
+      await add(ID.unique(), news)
     }
   }
 
@@ -56,7 +53,7 @@ const App = () => {
           <div key={n.$id}>
             <div><h3>{ n.title }</h3></div>
             <div>{ n.description }</div>
-            <div>{ n.author }: { formatDate(n.date) } </div>
+            <div>{ n.author && n.author + ' :' } { formatDate(n.date) } </div>
           </div>
         ))
       }
