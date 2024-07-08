@@ -37,8 +37,19 @@ const useDatabase = (databaseId, collectionId) => {
         }
     }
 
+    // delete
+    const remove = async (id, onSuccess, onFail) => {
+        try {
+            database.deleteDocument(databaseId, collectionId, id)
+            onSuccess && onSuccess()
+        } catch(e) {
+            console.log(e.message)
+            onFail && onFail()
+        }
+    }
+
     return {
-        get, add
+        get, add, remove
     }
 }
 
