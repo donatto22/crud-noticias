@@ -10,14 +10,18 @@
     position: sticky;
 }
 
-#newsForm input, #newsForm button, #newsForm textarea {
-    width: 100%;
+#newsForm :is(button, input, textarea) {
+    width: calc(100% - 2em);
     border: 0;
-    padding: 1em 0;
+    padding: 1em;
     margin: 0;
     background-color: rgba(240, 248, 255, 0.088);
     color: rgb(172, 230, 231); 
     border-radius: 4px;
+}
+
+#newsForm :is(button) {
+    width: 100%;
 }
 
 #newsForm textarea {

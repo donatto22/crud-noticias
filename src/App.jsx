@@ -21,7 +21,7 @@ const App = () => {
     }
 
     fetch()
-  })
+  }, [])
 
   async function createNews(e) {
     // obtener los datos del formulario
@@ -45,7 +45,7 @@ const App = () => {
 
   function formatDate (date) {
     const formattedDate = new Date(date)
-    return formattedDate.getDate() + "/" + formattedDate.getMonth() + "/" + formattedDate.getFullYear()
+    return formattedDate.getDate() + "/" + (formattedDate.getMonth() + 1) + "/" + formattedDate.getFullYear()
   }
 
   return (
