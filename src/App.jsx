@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ID } from './lib/appwrite'
 import { APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID } from './lib/env'
 
-import useDatabase from './hooks/useDatabase'
+import useAppwrite from './hooks/useAppwrite'
 import { NewsForm } from './components/NewsForm'
 import './app.css'
 
@@ -12,7 +12,7 @@ import { MdDelete } from "react-icons/md"
 
 const App = () => {
   const [news, setNews] = useState([])
-  const { get, add, remove } = useDatabase(APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID)
+  const { get, add, remove } = useAppwrite(APPWRITE_DATABASE_ID, APPWRITE_NEWS_COLLECTION_ID)
 
   useEffect(() => {
     async function fetch() {

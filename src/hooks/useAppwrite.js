@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-unused-vars
-import { ID, database } from '../lib/appwrite'
+import { ID, database, account as AppwriteAccount } from '../lib/appwrite'
 
 /**
- * 
  * @param { String } databaseId 
  * @param { String } collectionId 
+ * @param { String } documentId 
  * @description Hook creado para utilizar desde Appwrite una base de datos y una coleccion
  */
-const useDatabase = (databaseId, collectionId) => {
+const useDatabase = (databaseId, collectionId, documentId) => {
     // Read
     /**
      * @returns Documentos
@@ -23,7 +23,6 @@ const useDatabase = (databaseId, collectionId) => {
 
     // Create
     /**
-     * 
      * @param { ID } id El Id unico para crear el documento
      * @param { Object } data El objeto json que contiene la data a insertar 
      */
@@ -37,6 +36,14 @@ const useDatabase = (databaseId, collectionId) => {
         }
     }
 
+    /**
+     * @param { ID } id
+     * @param { Object } data
+     */
+    const edit = async (id, data) => {
+        // await database.updateDocument(id, collectionId, )
+    }
+
     // delete
     const remove = async (id, onSuccess, onFail) => {
         try {
@@ -48,8 +55,29 @@ const useDatabase = (databaseId, collectionId) => {
         }
     }
 
+    /**
+     * @param { String } email 
+     * @param { String } password 
+     */
+
+    const loginWithEmailAndPassword = async (email, password) => {
+        let session = null
+
+        try {
+            session = await AppwriteAccount.createEmailPasswordSession(email, password)
+        } catch (e) {
+            console.log(e.message)
+        }
+
+        const account = AppwriteAccount.get()
+
+        return {
+            session, account
+        }
+    }
+
     return {
-        get, add, remove
+        get, add, edit, remove, loginWithEmailAndPassword
     }
 }
 
